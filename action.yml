@@ -12,8 +12,17 @@ runs:
           >&2 echo "ERROR: No ./appinfo file found!"
           exit 1
         fi
-        echo "APPNAME=$(awk -F'=' '/X-AppImage-Name/{print $2; exit}' ./appinfo)" >> "${GITHUB_ENV}"
-        echo "VERSION=$(awk -F'=' '/X-AppImage-Version/{print $2; exit}' ./appinfo)" >> "${GITHUB_ENV}"
+        APPNAME=$(awk -F'=' '/X-AppImage-Name/{print $2; exit}
+        VERSION=$(awk -F'=' '/X-AppImage-Version/{print $2; exit}
+        if [ -z "$APPNAME" ]; then
+          >&2 echo "ERROR: ./appinfo is missing X-AppImage-Name"
+          exit 1
+        elif [ -z "$VERSION" ]; then
+          >&2 echo "ERROR: ./appinfo is missing X-AppImage-Version"
+          exit 1
+        fi
+        echo "APPNAME=APPNAME" >> "${GITHUB_ENV}"
+        echo "VERSION=$VERSION' ./appinfo)" >> "${GITHUB_ENV}"
         echo "DATE=$(date +'%Y-%m-%d_%s')" >> "${GITHUB_ENV}"
 
     - name: Release Artifacts
