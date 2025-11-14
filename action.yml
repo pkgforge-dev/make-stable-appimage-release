@@ -8,17 +8,13 @@ runs:
     - name: Read version and get date
       shell: sh
       run: |
-        if [ ! -f ./appname ]; then
-          >&2 echo "ERROR: No ./appname file found!"
-          exit 1
-        elif [ ! -f ./version ]; then
-          >&2 echo "ERROR: No ./version file found!"
+        if [ ! -f ./appinfo ]; then
+          >&2 echo "ERROR: No ./appinfo file found!"
           exit 1
         fi
-        cat ./appname
-        cat ./version
-        echo "APPNAME=$(cat ./appname)" >> "${GITHUB_ENV}"
-        echo "VERSION=$(cat ./version)" >> "${GITHUB_ENV}"
+
+        echo "APPNAME=$(awk -F'=' '/X-AppImage-Name/{print $2; exit}' ./appinfo)" >> "${GITHUB_ENV}"
+        echo "VERSION=$(awk -F'=' '/X-AppImage-Version/{print $2; exit}' ./appinfo)" >> "${GITHUB_ENV}"
         echo "DATE=$(date +'%Y-%m-%d_%s')" >> "${GITHUB_ENV}"
 
     - name: Release Artifacts
