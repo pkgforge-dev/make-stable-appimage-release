@@ -21,7 +21,7 @@ runs:
           >&2 echo "ERROR: ./appinfo is missing X-AppImage-Version"
           exit 1
         fi
-        echo "APPNAME=APPNAME" >> "${GITHUB_ENV}"
+        echo "APPNAME=$APPNAME" >> "${GITHUB_ENV}"
         echo "VERSION=$VERSION' ./appinfo)" >> "${GITHUB_ENV}"
         echo "DATE=$(date +'%Y-%m-%d_%s')" >> "${GITHUB_ENV}"
 
