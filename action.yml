@@ -12,8 +12,8 @@ runs:
           >&2 echo "ERROR: No ./appinfo file found!"
           exit 1
         fi
-        APPNAME=$(awk -F'=' '/X-AppImage-Name/{print $2; exit} ./appinfo)"
-        VERSION=$(awk -F'=' '/X-AppImage-Version/{print $2; exit} ./appinfo)"
+        APPNAME=$(awk -F'=' '/X-AppImage-Name/{print $2; exit} ./appinfo)
+        VERSION=$(awk -F'=' '/X-AppImage-Version/{print $2; exit} ./appinfo)
         if [ -z "$APPNAME" ]; then
           >&2 echo "ERROR: ./appinfo is missing X-AppImage-Name"
           exit 1
