@@ -12,7 +12,6 @@ runs:
           >&2 echo "ERROR: No ./appinfo file found!"
           exit 1
         fi
-
         echo "APPNAME=$(awk -F'=' '/X-AppImage-Name/{print $2; exit}' ./appinfo)" >> "${GITHUB_ENV}"
         echo "VERSION=$(awk -F'=' '/X-AppImage-Version/{print $2; exit}' ./appinfo)" >> "${GITHUB_ENV}"
         echo "DATE=$(date +'%Y-%m-%d_%s')" >> "${GITHUB_ENV}"
